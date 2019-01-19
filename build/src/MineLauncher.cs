@@ -11,7 +11,8 @@ namespace MyMod.src
     {
         public MineLauncher(float xval, float yval) : base(xval, yval)
         {
-            this.infinite = true;
+            this.ammo = 3;
+            this.physicsMaterial = PhysicsMaterial.Metal;
         }
 
         public override void Fire()
@@ -24,19 +25,33 @@ namespace MyMod.src
             if (this.ammo > 0) this.ammo--;
             if (isServerForObject)
             {
-                Mine mine = new Mine(0,0);
-                mine.position = Offset(this._barrelOffsetTL);
-                mine.vSpeed = this.barrelVector.y * 6f;
-                mine.hSpeed = this.barrelVector.x * 6f;
-                mine.Thrown();
+                Vec2 offset = this.Offset(this.barrelOffset);
+                ThrowableMine mine = new ThrowableMine(offset.x, offset.y);
+                mine.position = offset;
+                mine.vSpeed = this.barrelVector.y * 7f;
+                mine.hSpeed = this.barrelVector.x * 7f;
+                mine._pin = false;
+                mine.UpdatePinState();
+                mine.Arm();
+                this.Fondle((Thing)mine);
+                this.kick = 3f;
+                this.ApplyKick();
                 Level.Add(mine);
             }
-            base.OnPressAction();
         }
     }
 
-    public class ThrowableMine: ATGrenade
+    public class ThrowableMine : Mine
     {
-
+        public ThrowableMine(float xval, float yval) : base(xval, yval)
+        {
+        }
+        public override void Update()
+        {
+            this._bouncy = 0.2f;
+            this.gravMultiplier = 0.8f;
+            this.frictionMult = 0.2f;
+            base.Update();
+        }
     }
 }

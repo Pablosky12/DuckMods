@@ -8,3 +8,4 @@
 /build/obj/x86/Debug/kzmod.pdb
 /build/obj/x86/Debug/kzmod.dll
 /build/obj/x86/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+*.cache
