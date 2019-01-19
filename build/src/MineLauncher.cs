@@ -22,9 +22,9 @@ namespace MyMod.src
         public override void OnReleaseAction()
         {
             base.OnReleaseAction();
-            if (this.ammo > 0) this.ammo--;
-            if (isServerForObject)
+            if (this.ammo > 0 && isServerForObject)
             {
+                this.ammo--;
                 Vec2 offset = this.Offset(this.barrelOffset);
                 ThrowableMine mine = new ThrowableMine(offset.x, offset.y);
                 mine.position = offset;
@@ -50,7 +50,7 @@ namespace MyMod.src
         {
             this._bouncy = 0.2f;
             this.gravMultiplier = 0.8f;
-            this.frictionMult = 0.2f;
+            this.frictionMult = 0.4f;
             base.Update();
         }
     }
