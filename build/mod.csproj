@@ -44,6 +44,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="src\FightingKnife.cs" />
+    <Compile Include="src\ExplodingChestPlate.cs" />
+    <Compile Include="src\ImpactGrenade.cs" />
     <Compile Include="src\MineLauncher.cs" />
     <Compile Include="src\Mod.cs" />
   </ItemGroup>
